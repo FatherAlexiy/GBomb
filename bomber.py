@@ -1,11 +1,8 @@
 #-= It's just illusion =-#
 
-import requests
+import requests, random, time, fake_useragent, sys
 from threading import Thread
-import random
 from termcolor import colored
-import time
-import fake_useragent
 from update import *
 
 print(colored('''
@@ -19,7 +16,15 @@ print(colored('''
 ┗━━┛
 ''', 'red'), colored('\nBeta 0.2', 'cyan'))
 
-version = '0.1'
+def internet_on():
+	try:
+		response = requests.get("http://www.google.com")
+	except requests.ConnectionError:
+		print(colored('У вас наверно проблемы с интеретом, перезагрузити скрипт, командой: ', 'red'), colored("'python bomber.py'", 'magenta'))
+
+internet_on()
+
+version = '0.2'
 check_update(version)
 
 phone = input(colored('Ведите номер телефона>>: ','red'))
