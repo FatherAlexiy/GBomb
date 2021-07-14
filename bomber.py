@@ -17,7 +17,7 @@ print(colored('''
 ┗━┓┣┛┗┛┗┻━━┻┛┗┛
 ┏━┛┃
 ┗━━┛
-''', 'red'), colored('\nBeta 0.1', 'cyan'))
+''', 'red'), colored('\nBeta 0.2', 'cyan'))
 
 version = '0.1'
 check_update(version)
