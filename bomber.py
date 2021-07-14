@@ -21,6 +21,7 @@ def internet_on():
 		response = requests.get("http://www.google.com")
 	except requests.ConnectionError:
 		print(colored('У вас наверно проблемы с интеретом, перезагрузити скрипт, командой: ', 'red'), colored("'python bomber.py'", 'magenta'))
+		sys.exit()
 
 internet_on()
 
