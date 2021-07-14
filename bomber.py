@@ -30,7 +30,8 @@ check_update(version)
 
 phone = input(colored('Ведите номер телефона>>: ','red'))
 countT = input(colored('Enter threading>>: ','blue'))
-print("\nЧто бы отменить нажмите Ctrl + C\n\nТима кстати пидорас)")
+print("\nЧто бы отменить нажмите Ctrl + C")
+print('\n\n', colored('Т', 'grey'), colored('и', 'red'), colored('М', 'green'), colored('а', 'yellow'), ' ', colored('П', 'blue'), colored('и', 'magenta'), colored('Д', 'cyan'), colored('о', 'white'),  colored('Р', 'grey'), colored('а', 'red'),colored('С', 'green'))
 
 #Привожу к виду +7xxxxxxxxx
 if " " in phone:
