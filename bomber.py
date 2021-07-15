@@ -1,9 +1,52 @@
 #-= It's just illusion =-#
-
 import requests, random, time, fake_useragent, sys
 from threading import Thread
 from termcolor import colored
 from update import *
+
+user = fake_useragent.UserAgent().random
+headers1 = {'user_agent': user}
+version = '0.25'
+iteration = 0
+_name = ''
+
+def internet_on():
+	try:
+		response = requests.get("http://www.google.com")
+	except requests.ConnectionError:
+		print(colored('У вас наверно проблемы с интеретом, перезагрузити скрипт, командой: ', 'red'), colored("'python bomber.py'", 'magenta'))
+		sys.exit()
+
+def normalizephone(phone):
+    if '-' in  phone:
+        phone = phone.replace('-', '')
+    if ')' in  phone:
+        phone = phone.replace(')', '')
+    if '(' in  phone:
+        phone = phone.replace('(', '')
+    if '.' in  phone:
+        phone = phone.replace('.', '')
+    if '_' in  phone:
+        phone = phone.replace('_', '')
+    if '*' in  phone:
+        phone = phone.replace('*', '')
+    if " " in phone:
+    	phone = phone.replace(" ", "")
+    if phone[0] != "+":
+    	if phone[0]== "8":
+    		phone = phone.replace("8", "+7", 1)
+    	else:
+    		phone = "+7" + phone
+    return phone
+
+def zapros():
+    global _phone
+    global countT
+    _phone = input('Ведите номер телефона>>: ')
+    countT = input('Enter threading>>: ')
+
+internet_on()
+check_update(version)
 
 print(colored('''
 ╋╋╋╋╋╋╋╋╋╋╋┏┓
@@ -16,42 +59,19 @@ print(colored('''
 ┗━━┛
 ''', 'red'), colored('\nBeta 0.2', 'cyan'))
 
-def internet_on():
-	try:
-		response = requests.get("http://www.google.com")
-	except requests.ConnectionError:
-		print(colored('У вас наверно проблемы с интеретом, перезагрузити скрипт, командой: ', 'red'), colored("'python bomber.py'", 'magenta'))
-		sys.exit()
+zapros()
 
-internet_on()
+phone = normalizephone(_phone)
 
-version = '0.2'
-check_update(version)
-
-phone = input(colored('Ведите номер телефона>>: ','red'))
-countT = input(colored('Enter threading>>: ','blue'))
-print("\nЧто бы отменить нажмите Ctrl + C")
-print('\n\n', colored('Т', 'grey'), colored('и', 'red'), colored('М', 'green'), colored('а', 'yellow'), ' ', colored('П', 'blue'), colored('и', 'magenta'), colored('Д', 'cyan'), colored('о', 'white'),  colored('Р', 'grey'), colored('а', 'red'),colored('С', 'green'))
-
-#Привожу к виду +7xxxxxxxxx
-if " " in phone:
-	phone = phone.replace(" ", "")
-if phone[0] != "+":
-	if phone[0]== "8":
-		phone = phone.replace("8", "+7", 1)
-	else:
-		phone = "+7" + phone
-
-
-iteration = 0
-_name = ''
 for x in range(12):
 	_name = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
 	password = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
 	username = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
 
-user = fake_useragent.UserAgent().random
-headers1 = {'user_agent': user}
+
+
+print("\nЧто бы отменить нажмите Ctrl + C")
+print('\n\n', colored('Т', 'grey'), colored('и', 'red'), colored('М', 'green'), colored('а', 'yellow'), ' ', colored('П', 'blue'), colored('и', 'magenta'), colored('Д', 'cyan'), colored('о', 'white'),  colored('Р', 'grey'), colored('а', 'red'),colored('С', 'green'))
 
 def infinity():
 	count = 0
